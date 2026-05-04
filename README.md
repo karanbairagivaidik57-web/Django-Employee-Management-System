@@ -1,50 +1,63 @@
 # 🚀 Employee Management System (Django)
 
-A complete **Employee Management Web Application** built using Django with MySQL database and a responsive UI. 
-This project allows users to manage employees and departments efficiently with real-world validations and clean design.
+[![Deployment Status](https://shields.io)](https://django-employee-management-system-apn0.onrender.com/)
+[![Database](https://shields.io)](https://aiven.io)
+
+A complete **Employee Management Web Application** built using Django with a MySQL cloud database. This project features real-world data validations, advanced search, and a clean, responsive UI.
+
+---
+
+## 📸 Screenshots
+
+
+| 📊 Dashboard Overview | ➕ Add Employee Form |
+|---|---|
+| ![Dashboard](screenshots/dashboard.png) | ![Add Employee](screenshots/add_emp.png) |
+
+| 🔍 Advanced Search & Filtering |
+|---|---|
+| ![Search](screenshots/search.png) |
 
 ---
 
 ## 🌐 🔗 Live Demo
 
-👉 **Live Link:** [Click Here to View Live] https://django-employee-management-system-apn0.onrender.com/  
+👉 **Live Link:** [View Project Live](https://django-employee-management-system-apn0.onrender.com/)
 
 ---
 
-## 📌 🔥 Features
+## 📌 🔥 Key Features
 
 ### 👨‍💼 Employee Management
-* **Add Employee:** Create new employee profiles using **Django ModelForms**.
-* **Update/Delete:** Perform full CRUD operations seamlessly.
-* **Search Functionality:** Advanced filtering using **Django ORM Lookups** (Name, Email, Phone, or Department).
+*   **Full CRUD Operations:** Seamlessly Add, Update, and Delete employee profiles.
+*   **Django ModelForms:** Used for rapid development and automatic form generation.
+*   **Advanced Search:** Built with **Django ORM Lookups** to filter by Name, Email, Phone, or Department.
 
 ### 🏢 Department Management
-* **Organization:** Manage departments with **Auto-Count** logic for employees in each department.
-* **Seamless UI:** Dedicated views for department lists and edits.
+*   **Dynamic Organization:** Manage departments with **Auto-Count** logic for employee distribution.
+*   **Relational Integrity:** Managed through Foreign Key relationships.
 
 ---
 
 ## 🛠️ Technical Highlights (The "Secret Sauce")
 
-### ⚙️ Database & ORM Power
-* **Django ORM:** Used complex queries and lookups for efficient data retrieval without writing raw SQL.
-* **Model Relationship:** Managed Foreign Key relationships between Employees and Departments.
-* **Data Migration:** Leveraged Django Migrations for version control of the database schema.
+### ⚙️ Backend & ORM
+*   **Complex Queries:** Leveraged Django ORM for efficient data retrieval without raw SQL.
+*   **Cloud Database:** Production-ready MySQL hosting on **Aiven Cloud**.
+*   **Migrations:** Full version control for database schema.
 
-### 📝 Form Handling & Validation
-* **ModelForms:** Utilized `ModelForm` for rapid development and automatic form generation from models.
-* **Custom Validations:** 
-    *   **Data Integrity:** Name (alphabets only) & Mobile (Indian format).
-    *   **Business Logic:** Salary > 0, Unique Email check, and no future Hire Dates.
-    *   **Safety:** Prevention of duplicate department entries.
+### 📝 Validations & Security
+*   **Custom Business Logic:** Validations for Name (alphabets), Indian Mobile format, Salary (>0), and Unique Emails.
+*   **Security First:** Environment variables (`python-dotenv`) to protect sensitive API/DB keys.
+*   **Production Serving:** Integrated `WhiteNoise` for efficient static file management.
 
 ---
 
-## 🏗️ Tech Stack & Security
-* **Backend:** Django (Python)
-* **Database:** MySQL (Hosted on **Aiven Cloud**)
-* **Security:** Environment variables (`python-dotenv`) to hide sensitive credentials.
-* **Frontend:** Responsive HTML & CSS (Card layout for mobile).
+## 🏗️ Tech Stack
+*   **Backend:** Django (Python)
+*   **Database:** MySQL (Aiven)
+*   **Frontend:** HTML5, CSS3 (Responsive Layout)
+*   **Deployment:** Render
 
 ---
 
@@ -62,7 +75,7 @@ pip install -r requirements.txt
 ```
 
 ### 3️⃣ Setup Environment Variables
-Create a `.env` file in the root directory (near `manage.py`) and add your database details:
+Create a `.env` file in the root directory and add your database details:
 ```text
 DB_NAME=your_db_name
 DB_USER=your_db_user
