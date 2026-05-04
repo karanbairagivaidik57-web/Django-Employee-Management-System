@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMS | Modern Dashboard</title>
+    
+    <link rel="icon" type="image/x-icon" href="https://flaticon.com">
+
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #3b82f6;
+            --bg: #f1f5f9;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg); color: #334155; }
+
+        .navbar {
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+            background: white;
+        }
+
+        .navbar h1 { font-size: 1.3rem; font-weight: 800; }
+        .navbar span { font-size: 0.85rem; background: rgba(255,255,255,0.1); padding: 6px 16px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        #msg-container { position: fixed; top: 80px; right: 20px; z-index: 9999; max-width: 350px; }
+        .alert { padding: 16px 24px; border-radius: 12px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; transition: 0.5s; }
+        .alert-success { background: #10b981; color: white; border-left: 6px solid #065f46; }
+        .stats-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 50px; }
+        .stat-card { background: var(--white); padding: 30px; border-radius: 24px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #e2e8f0; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+        .menu-grid a { text-decoration: none; background: var(--white); padding: 35px 20px; display: flex; flex-direction: column; align-items: center; gap: 15px; border-radius: 24px; color: var(--primary); font-weight: 700; border: 1px solid #f1f5f9; transition: 0.4s; }
+        .menu-grid a:hover { background: var(--accent); color: white; transform: translateY(-10px); }
+        .emoji { font-size: 2.5rem; }
+    </style>
+    <link rel="icon" type="image/png" href="https://www.shutterstock.com/image-vector/objective-icon-visual-symbol-that-600w-2629153077.jpg">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo-section">
+            <img src="https://www.shutterstock.com/image-vector/glowing-neon-font-shiny-letter-600w-71378368.jpg" alt="Logo" class="logo-img">
+            <h1>EMS Dashboard</h1>
+        </div>
+        <span>👤 Karan Bairagi | Admin</span>
+    </nav>
+
+    <div id="msg-container">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-error{% endif %}">
+                <span>{% if message.tags == 'success' %}✅{% else %}⚠️{% endif %}</span>
+                {{message}}
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="container">
+        {%if emp or dep%}
+        <div class="stats-box">
+            <div class="stat-card">
+                <div><p>Staff</p><h3>{{emp}}</h3></div>
+                <span class="emoji">👥</span>
+            </div>
+            <div class="stat-card">
+                <div><p>Depts</p><h3>{{dep}}</h3></div>
+                <span class="emoji">🏢</span>
+            </div>
+        </div>
+        {%endif%}
+
+        <div class="menu-grid">
+            <a href="{%url 'emp'%}"><span class="emoji">➕</span>Add Employee</a>
+            <a href="{%url 'dep'%}"><span class="emoji">🏢</span>Add Dept</a>
+            <a href="{%url 'up'%}"><span class="emoji">✏️</span>Update Details</a>
+            <a href="{%url 'list_emp'%}"><span class="emoji">📋</span>Employee List</a>
+            <a href="{%url 'list_dep'%}"><span class="emoji">🏛️</span>Departments</a>
+            <a href="{%url 'search'%}"><span class="emoji">🔍</span>Quick Search</a>
+        </div>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            const msg = document.getElementById('msg-container');
+            if(msg) { msg.style.opacity = '0'; setTimeout(() => msg.style.display = 'none', 500); }
+        }, 3000);
+    </script>
+</body>
+</html>

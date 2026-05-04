@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMS | Add Employee</title>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #2563eb;
+            --bg: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background: var(--bg); color: #334155; }
+
+        
+        .navbar {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--accent);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar h1 { font-size: 1.4rem; letter-spacing: 1px; }
+        .navbar span { font-size: 0.8rem; background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); }
+
+        
+        .container { max-width: 550px; margin: 40px auto; padding: 0 20px; }
+        
+        .form-card {
+            background: white;
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .form-card h2 { text-align: center; margin-bottom: 25px; color: var(--primary); font-size: 1.6rem; font-weight: 800; }
+
+        
+        .msg-container { margin-bottom: 20px; overflow: hidden; }
+        
+        .success-msg, .msg-success { 
+            color: #ffffff; 
+            background: #10b981; 
+            padding: 14px; 
+            border-radius: 12px; 
+            text-align: center; 
+            font-weight: bold; 
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+            display: block;
+            animation: slideDown 0.4s ease;
+        }
+        
+        .msg-error { 
+            color: #ffffff; 
+            background: #ef4444; 
+            padding: 14px; 
+            border-radius: 12px; 
+            text-align: center; 
+            font-weight: bold; 
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+            display: block;
+            animation: slideDown 0.4s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        
+        form p { margin-bottom: 18px; position: relative; }
+        label { display: block; margin-bottom: 6px; font-weight: 700; color: #475569; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        input, select, textarea {
+            width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #e2e8f0;
+            background: #f8fafc; font-size: 1rem; transition: all 0.2s ease;
+        }
+
+        input:focus, select:focus { 
+            border-color: var(--accent); 
+            outline: none; 
+            background: white;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+            transform: translateY(-1px);
+        }
+
+        
+        .error-msg { 
+            color: #ef4444; 
+            font-size: 0.8rem; 
+            margin-top: 6px; 
+            font-weight: 600; 
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        
+        .btn-group { display: flex; gap: 12px; margin-top: 30px; }
+        .btn { 
+            flex: 1; padding: 16px; border: none; border-radius: 14px; 
+            cursor: pointer; font-weight: 800; font-size: 1rem; 
+            text-decoration: none; text-align: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .submit-btn { background: var(--accent); color: white; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3); }
+        .submit-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4); }
+        .submit-btn:active { transform: translateY(0); }
+
+        .cancel-btn { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+        .cancel-btn:hover { background: #e2e8f0; color: #1e293b; }
+
+        
+        @media (max-width: 500px) { 
+            .btn-group { flex-direction: column; } 
+            .navbar { padding: 1rem 5%; }
+            .form-card { padding: 25px 20px; }
+        }
+    </style>
+    <link rel="icon" type="image/png" href="https://www.shutterstock.com/image-vector/objective-icon-visual-symbol-that-600w-2629153077.jpg">
+</head>
+<body>
+
+    <nav class="navbar">
+        <h1>📊 EMS Admin</h1>
+        <span>👤 Karan Bairagi</span>
+    </nav>
+
+    <div class="container">
+        <div class="form-card">
+            <h2>Add Employee</h2>
+
+           
+            <div class="msg-container" id="auto-hide-msg">
+                {% if success %}
+                    <p class="success-msg">✅ {{ success }}</p>
+                {% endif %}
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="{% if message.tags == 'success' %}msg-success{% else %}msg-error{% endif %}">
+                            {% if message.tags == 'success' %}✅{% else %}⚠️{% endif %} {{ message }}
+                        </p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <form action="" method="POST" novalidate id="employeeForm">
+                {% csrf_token %}
+                
+                {% for field in f %}
+                <p>
+                    {{ field.label_tag }} 
+                    {{ field }}
+                    
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <span class="error-msg">⚠️ {{ error }}</span>
+                        {% endfor %}
+                    {% endif %}
+                </p>
+                {% endfor %}
+
+                <div class="btn-group">
+                    <button type="submit" class="btn submit-btn" id="submitBtn">💾 Save Data</button>
+                    <a href="{% url 'dash' %}" class="btn cancel-btn">🔙 Exit</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const msgBox = document.getElementById('auto-hide-msg');
+            const successElement = msgBox.querySelector('.success-msg, .msg-success');
+            
+            if (successElement) {
+                setTimeout(() => {
+                    msgBox.style.transition = "all 0.5s ease";
+                    msgBox.style.height = "0";
+                    msgBox.style.margin = "0";
+                    msgBox.style.opacity = "0";
+                }, 3000);
+            }
+        });
+
+        
+        const form = document.getElementById('employeeForm');
+        const btn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', function() {
+            btn.style.opacity = "0.7";
+            btn.innerHTML = "Processing...";
+            btn.style.pointerEvents = "none";
+        });
+    </script>
+
+</body>
+</html>

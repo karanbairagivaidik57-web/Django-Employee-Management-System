@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMS | View Employees</title>
+    <link rel="icon" type="image/png" href="https://www.shutterstock.com/image-vector/objective-icon-visual-symbol-that-600w-2629153077.jpg">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #3b82f6;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --bg: #f8fafc;
+            --text: #334155;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background: var(--bg); color: var(--text); }
+
+        .navbar {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px 5%; }
+
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .table-box {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        
+        th {
+            background: #f8fafc;
+            color: #64748b;
+            text-align: left;
+            padding: 15px 20px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #edf2f7;
+        }
+
+        td { padding: 18px 20px; border-bottom: 1px solid #edf2f7; font-size: 0.95rem; }
+
+        .dept-badge {
+            background: #eff6ff;
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .salary-tag { color: var(--success); font-weight: 700; }
+
+        .btn {
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .edit { background: #dbeafe; color: #1e40af; margin-right: 5px; }
+        .edit:hover { background: #1e40af; color: white; }
+
+        .delete { background: #fee2e2; color: #991b1b; }
+        .delete:hover { background: #991b1b; color: white; }
+
+        .mobile-cards { display: none; }
+        
+        .emp-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .emp-card h4 { font-size: 1.1rem; color: var(--primary); margin-bottom: 10px; }
+        .emp-card p { font-size: 0.9rem; color: #64748b; margin-bottom: 5px; }
+        .emp-card .card-actions { margin-top: 15px; padding-top: 15px; border-top: 1px solid #f1f5f9; }
+
+        @media(max-width: 768px) {
+            .table-box { display: none; }
+            .mobile-cards { display: block; }
+            .header-flex { flex-direction: column; align-items: flex-start; gap: 10px; }
+        }
+
+        .no-data { text-align: center; padding: 50px; color: #94a3b8; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <h3>📋 EMS | Employee Directory</h3>
+        <span>Admin: Karan Bairagi</span>
+    </nav>
+
+    <div class="container">
+        
+        <div class="header-flex">
+            <h2>Team Members</h2>
+            <a href="{%url 'dash'%}" class="back-btn">⬅ Back to Dashboard</a>
+        </div>
+
+        <div class="table-box">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Contact Details</th>
+                        <th>Department</th>
+                        <th>Salary</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in f %}
+                    <tr>
+                        <td><strong>{{i.name}}</strong></td>
+                        <td>
+                            <div>{{i.email}}</div>
+                            <div style="font-size: 0.8rem; color: #94a3b8;">{{i.phone}}</div>
+                        </td>
+                        <td><span class="dept-badge">{{i.dep.dep_name}}</span></td>
+                        <td><span class="salary-tag">₹{{i.salary}}</span></td>
+                        <td>
+                            <a href="{%url 'edit' i.emp_id%}" class="btn edit">✏️ Edit</a>
+                            <a href="{%url 'delete_emp' i.emp_id%}" class="btn delete" 
+                               onclick="return confirm('Delete this record?')">🗑️ Del</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="no-data">No employees in the system yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mobile-cards">
+            {% for i in f %}
+            <div class="emp-card">
+                <h4>{{i.name}}</h4>
+                <p>📧 {{i.email}}</p>
+                <p>📞 {{i.phone}}</p>
+                <p>🏢 <span class="dept-badge">{{i.dep.dep_name}}</span></p>
+                <p>💰 <span class="salary-tag">₹{{i.salary}}</span></p>
+                <div class="card-actions">
+                    <a href="{%url 'edit' i.emp_id%}" class="btn edit">✏️ Edit</a>
+                    <a href="{%url 'delete_emp' i.emp_id%}" class="btn delete" onclick="return confirm('Delete?')">🗑️ Delete</a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="no-data">No employees found.</div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</body>
+</html>
