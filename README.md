@@ -15,24 +15,33 @@ This project allows users to manage employees and departments efficiently with r
 ## 📌 🔥 Features
 
 ### 👨‍💼 Employee Management
-* **Add Employee:** Create new employee profiles.
-* **Update/Delete:** Easily modify or remove records.
-* **Search Functionality:** Filter employees by Name, Email, Phone, or Department.
+* **Add Employee:** Create new employee profiles using **Django ModelForms**.
+* **Update/Delete:** Perform full CRUD operations seamlessly.
+* **Search Functionality:** Advanced filtering using **Django ORM Lookups** (Name, Email, Phone, or Department).
 
 ### 🏢 Department Management
-* **Organization:** Manage departments with auto-count of employees.
+* **Organization:** Manage departments with **Auto-Count** logic for employees in each department.
 * **Seamless UI:** Dedicated views for department lists and edits.
 
 ---
 
-## ✅ Real-World Validations
-* **Data Integrity:** Name validation (alphabets only) & Mobile number validation (Indian format).
-* **Business Logic:** Salary > 0, Unique Email check, and no future Hire Dates.
-* **Safety:** Prevention of duplicate department entries.
+## 🛠️ Technical Highlights (The "Secret Sauce")
+
+### ⚙️ Database & ORM Power
+* **Django ORM:** Used complex queries and lookups for efficient data retrieval without writing raw SQL.
+* **Model Relationship:** Managed Foreign Key relationships between Employees and Departments.
+* **Data Migration:** Leveraged Django Migrations for version control of the database schema.
+
+### 📝 Form Handling & Validation
+* **ModelForms:** Utilized `ModelForm` for rapid development and automatic form generation from models.
+* **Custom Validations:** 
+    *   **Data Integrity:** Name (alphabets only) & Mobile (Indian format).
+    *   **Business Logic:** Salary > 0, Unique Email check, and no future Hire Dates.
+    *   **Safety:** Prevention of duplicate department entries.
 
 ---
 
-## 🛠️ Tech Stack & Security
+## 🏗️ Tech Stack & Security
 * **Backend:** Django (Python)
 * **Database:** MySQL (Hosted on **Aiven Cloud**)
 * **Security:** Environment variables (`python-dotenv`) to hide sensitive credentials.
@@ -44,8 +53,7 @@ This project allows users to manage employees and departments efficiently with r
 
 ### 1️⃣ Clone the repository
 ```bash
-### 1️⃣ Clone the repository
-git clone https://github.com/karanbairagivaidik57-web/Django-Employee-Management-System
+git clone https://github.com
 cd Django-Employee-Management-System
 ```
 
