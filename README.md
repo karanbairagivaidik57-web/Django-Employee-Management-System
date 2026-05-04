@@ -53,7 +53,7 @@ This project allows users to manage employees and departments efficiently with r
 
 ### 1️⃣ Clone the repository
 ```bash
-git clone https://github.com
+git clone https://github.com/karanbairagivaidik57-web/Django-Employee-Management-System
 cd Django-Employee-Management-System
 ```
 
