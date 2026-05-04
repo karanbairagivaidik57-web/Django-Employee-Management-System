@@ -3,7 +3,7 @@
 [![Deployment Status](https://shields.io)](https://django-employee-management-system-apn0.onrender.com/)
 [![Database](https://shields.io)](https://aiven.io)
 
-A complete **Employee Management Web Application** built using Django with a MySQL cloud database. This project features real-world data validations, advanced search, and a clean, responsive UI.
+A professional **Employee Management Web Application** built using Django. This project features a robust MySQL backend, advanced ORM queries, and real-time user feedback.
 
 ---
 
@@ -21,61 +21,51 @@ A complete **Employee Management Web Application** built using Django with a MyS
 ---
 
 ## 🌐 🔗 Live Demo
-
-👉 **Live Link:** [View Project Live](https://django-employee-management-system-apn0.onrender.com/)
-
----
-
-## 📌 🔥 Key Features
-
-### 👨‍💼 Employee Management
-*   **Full CRUD Operations:** Seamlessly Add, Update, and Delete employee profiles.
-*   **Django ModelForms:** Used for rapid development and automatic form generation.
-*   **Advanced Search:** Built with **Django ORM Lookups** to filter by Name, Email, Phone, or Department.
-
-### 🏢 Department Management
-*   **Dynamic Organization:** Manage departments with **Auto-Count** logic for employee distribution.
-*   **Relational Integrity:** Managed through Foreign Key relationships.
+👉 **View Live:** [Click Here](https://django-employee-management-system-apn0.onrender.com/)
 
 ---
 
 ## 🛠️ Technical Highlights (The "Secret Sauce")
 
-### ⚙️ Backend & ORM
-*   **Complex Queries:** Leveraged Django ORM for efficient data retrieval without raw SQL.
-*   **Cloud Database:** Production-ready MySQL hosting on **Aiven Cloud**.
-*   **Migrations:** Full version control for database schema.
+### ⚙️ Django ORM & Database
+*   **Complex Lookups:** Used **Django ORM** for efficient data filtering and retrieval without raw SQL.
+*   **Relational Mapping:** Managed Foreign Key relationships between Employees and Departments.
+*   **Cloud Hosting:** Production database hosted on **Aiven MySQL Cloud**.
 
-### 📝 Validations & Security
-*   **Custom Business Logic:** Validations for Name (alphabets), Indian Mobile format, Salary (>0), and Unique Emails.
-*   **Security First:** Environment variables (`python-dotenv`) to protect sensitive API/DB keys.
-*   **Production Serving:** Integrated `WhiteNoise` for efficient static file management.
+### 📝 Forms & Feedback Framework
+*   **ModelForms:** Integrated `ModelForm` for seamless data binding and automatic form generation.
+*   **Messages Framework:** Implemented **Django Contrib Messages** to provide real-time feedback (Success/Error alerts) for CRUD operations.
+*   **Robust Validations:** Custom field-level validations for Indian phone formats, unique emails, and salary checks.
+
+---
+
+## 📌 🔥 Features
+*   **Full CRUD:** Add, Update, and Delete employees with ease.
+*   **Search Engine:** Advanced filtering by Name, Department, or Contact details.
+*   **Responsive UI:** Clean, card-based layout designed for both Desktop and Mobile.
+*   **Security:** Credentials managed securely via `.env` and `python-dotenv`.
 
 ---
 
 ## 🏗️ Tech Stack
 *   **Backend:** Django (Python)
 *   **Database:** MySQL (Aiven)
-*   **Frontend:** HTML5, CSS3 (Responsive Layout)
-*   **Deployment:** Render
+*   **Frontend:** HTML5, CSS3, JavaScript
+*   **Deployment:** Render (with WhiteNoise for static files)
 
 ---
 
-## ⚙️ Setup Instructions (Local)
+## ⚙️ Local Setup
 
-### 1️⃣ Clone the repository
+### 1️⃣ Clone & Install
 ```bash
 git clone https://github.com/karanbairagivaidik57-web/Django-Employee-Management-System
 cd Django-Employee-Management-System
-```
-
-### 2️⃣ Install dependencies
-```bash
 pip install -r requirements.txt
 ```
 
-### 3️⃣ Setup Environment Variables
-Create a `.env` file in the root directory and add your database details:
+### 2️⃣ Environment Setup
+Create a `.env` file:
 ```text
 DB_NAME=your_db_name
 DB_USER=your_db_user
@@ -84,7 +74,7 @@ DB_HOST=your_db_host
 DB_PORT=your_db_port
 ```
 
-### 4️⃣ Run migrations & Start server
+### 3️⃣ Run Project
 ```bash
 python manage.py migrate
 python manage.py runserver
@@ -94,8 +84,6 @@ python manage.py runserver
 
 ## 👨‍💻 Author
 **Karan Bairagi**
-
----
 
 ## ⭐ Support
 If you like this project, give it a ⭐ on GitHub!
