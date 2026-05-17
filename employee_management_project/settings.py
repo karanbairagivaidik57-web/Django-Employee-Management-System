@@ -84,7 +84,9 @@ DATABASES = {
         'PASSWORD':os.environ.get('DB_PASSWORD'),
         'USER':os.environ.get('DB_USER'),
         'HOST':os.environ.get('DB_HOST'),
-        'PORT':os.environ.get('DB_PORT')
+        'PORT':os.environ.get('DB_PORT'),
+        'OPTIONS': {
+            'ssl': {'ssl_mode': 'REQUIRED'} 
     }
 }
 
