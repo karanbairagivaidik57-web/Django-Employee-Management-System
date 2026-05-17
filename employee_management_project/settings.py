@@ -87,6 +87,7 @@ DATABASES = {
         'PORT':os.environ.get('DB_PORT'),
         'OPTIONS': {
             'ssl': {'ssl_mode': 'REQUIRED'} 
+        }
     }
 }
 
