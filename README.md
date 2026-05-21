@@ -59,7 +59,7 @@ A professional **Employee Management Web Application** built using Django. This 
 
 ### 1️⃣ Clone & Install
 ```bash
-git clone https://github.com/karanbairagivaidik57-web/Django-Employee-Management-System
+git clone https://github.com/karan-bairagi/Django-Employee-Management-System
 cd Django-Employee-Management-System
 pip install -r requirements.txt
 ```
